@@ -76,15 +76,19 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    lists: async (_, params, req) => {
-      console.log(`call to list with params ${JSON.stringify(params)}`);
+    lists: async (_, params) => {
+      console.log(`got request lists(${JSON.stringify(params)})`);
+
       let searchParams = new URLSearchParams(params);
+
+      const headers = {
+        Accept: "application/json",
+        "Api-Token": process.env.AC_KEY,
+      };
+
       return await getData(
         process.env.AC_URL + "/api/3/lists" + "?" + searchParams.toString(),
-        {
-          Accept: "application/json",
-          "Api-Token": process.env.AC_KEY,
-        }
+        headers
       );
     },
   },

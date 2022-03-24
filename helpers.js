@@ -37,7 +37,6 @@ const postData = async (url, body) => {
         error: json,
       });
     }
-    console.log(json);
     return json;
   } catch (error) {
     console.log(JSON.stringify(error));
